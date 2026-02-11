@@ -1,60 +1,112 @@
 --- 
-title: "A Minimal Book Example"
-author: "John Doe"
+title: "Ejercicios Corte 1"
+author: "Tiffany Mendoza S."
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
+output: bookdown::gitbook
 documentclass: book
 bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
-# cover-image: path to the social sharing image like images/cover.jpg
-description: |
-  This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
-  set in the _output.yml file.
+biblio-style: apalike
 link-citations: yes
 github-repo: rstudio/bookdown-demo
+description: "Ejercicios R."
 ---
 
-# About
+# Ejercicio 1
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
+A partir del dataset df, el cual trata de los incendios forestales, realice las siguientes tareas:
 
-## Usage 
+- Filtrar los registros para incluir únicamente los incendios ocurridos en el estado de Idaho.
 
-Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
+- Seleccionar únicamente las columnas YEAR_, CAUSE y TOTALACRES.
 
-Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
+- Renombrar estas columnas con nombres más claros y descriptivos.
 
-The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
+- Agrupar la información por CAUSE y YEAR_.
 
-## Render book
+- Resumir el total de acres quemados para cada combinación de causa y año.
 
-You can render the HTML version of this example book without changing anything:
+- Elaborar una visualización que muestre los resultados de manera clara.
 
-1. Find the **Build** pane in the RStudio IDE, and
 
-1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
-
-Or build the book from the R console:
-
-```{r, eval=FALSE}
-bookdown::render_book()
-```
-
-To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
-
-## Preview book
-
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
-
-```{r eval=FALSE}
-bookdown::serve_book()
-```
+## Incendios forestales {.unnumbered}
 
 
 ```{r include=FALSE}
-# automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'kableExtra'
 ), 'packages.bib')
+
 ```
+
+```{r results='hide', message=FALSE, warning=FALSE, }
+library(tidyverse)
+library(kableExtra)
+library(ggplot2)
+df <- read_csv('/Users/pctm/Library/Mobile Documents/com~apple~CloudDocs/RDataSets/StudyArea.csv')
+```
+
+## Desarrollo {.unnumbered}
+
+
+#### Filtrar los registros para incluir únicamente los incendios ocurridos en el estado de Idaho. Seleccionar y renombrar únicamente las columnas YEAR_, CAUSE y TOTALACRES. {.unnumbered}
+
+```{r}
+df %>% 
+  filter(STATE == 'Idaho')  %>% 
+  select(STARTYR=YEAR_, NATURE=CAUSE, ACRES=TOTALACRES) -> df_filtrado
+
+head(df_filtrado)
+```
+
+
+### Agrupar la informacion por cause y year. {.unnumbered}
+
+```{r message=FALSE, warning=FALSE}
+
+df_filtrado %>% 
+  group_by(NATURE, STARTYR) %>% 
+  summarise(median_acres = mean(ACRES),
+            ds_acres = sd(ACRES),
+            mediana_acres = median(ACRES),
+            RIC_acres = IQR(ACRES),
+            min_acres = min(ACRES),
+            max_acres = max(ACRES),
+            q1_acres = quantile(ACRES)[2],
+            q3_acres = quantile(ACRES)[4],
+            total_acres = sum(ACRES)
+            
+            )-> showdf
+
+kable(showdf, caption = "Agrupación por causa y año") %>% 
+  column_spec(2, width = "20em") %>%
+  scroll_box(width = "100%", height = "550px")
+
+
+```
+#### Gráficos {.unnumbered}
+```{r}
+ggplot(showdf, aes(x = factor(STARTYR), y = total_acres, fill = NATURE)) +
+  geom_col() +
+  labs(x="Año", y="Total acres", title="Total anual por causa") +
+  theme_minimal() +
+  scale_y_continuous(labels = scales::comma) +
+  theme(axis.text.x = element_text(angle=45, hjust=1))
+
+```
+
+El gráfico de barras muestra que la variación anual en acres quemados es muy alta y está dominada por unos pocos años con incendios extremadamente grandes; en esos picos la mayor parte del área quemada corresponde a causas naturales, mientras que las causas humanas contribuyen de forma constante pero en magnitud mucho menor. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(showdf, aes(x = factor(STARTYR), y = total_acres)) +
+  geom_boxplot(outlier.shape = NA, alpha = 0.8) +
+  geom_jitter(width = 0.12, alpha = 0.12, size = 0.6, color = "steelblue") +
+  stat_summary(fun = median, geom = "point", shape = 20, size = 2, color = "darkred") +
+  labs(title = "Distribución de acres por incendio — boxplot por año",
+       x = "Año", y = "Acres") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+Este gráfico muestra, año a año, la distribución del tamaño de incendios (acres por incendio) mediante boxplots: la caja (IQR) marca la dispersión central, la línea roja indica la mediana, los bigotes extienden la variación típica y los puntos/extremos fuera de los bigotes son outliers / mega-fires. Visualmente se aprecia que en la mayoría de los años la mediana es baja (los puntos rojos están cerca de la base), mientras que los bigotes y los outliers alcanzan valores enormes en unos pocos años. Esto indica una distribución con cola larga a la derecha: muchos incendios pequeños y unos pocos incendios extremadamente grandes que empujan la escala.

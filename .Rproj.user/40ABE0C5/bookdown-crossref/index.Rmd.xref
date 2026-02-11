@@ -1,5 +1,8 @@
-h1:about About
-h2:usage Usage
-h2:render-book Render book
-h2:preview-book Preview book
+h1:ejercicio-1 Ejercicio 1
+h2:incendios-forestales Incendios forestales
+h2:desarrollo Desarrollo
+h4:filtrar-los-registros-para-incluir-únicamente-los-incendios-ocurridos-en-el-estado-de-idaho.-seleccionar-y-renombrar-únicamente-las-columnas-year_-cause-y-totalacres. Filtrar los registros para incluir únicamente los incendios ocurridos en el estado de Idaho. Seleccionar y renombrar únicamente las columnas YEAR_, CAUSE y TOTALACRES.
+h3:agrupar-la-informacion-por-cause-y-year. Agrupar la informacion por cause y year.
+tab:message Agrupación por causa y año
+h4:gráficos Gráficos
 
