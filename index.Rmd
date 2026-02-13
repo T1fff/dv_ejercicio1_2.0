@@ -1,6 +1,6 @@
 --- 
 title: "Ejercicios Corte 1"
-author: "Tiffany Mendoza S."
+author: "Tiffany Mendoza S. y Sergio Rada"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
