@@ -23,7 +23,7 @@
 <meta name="author" content="Tiffany Mendoza S." />
 
 
-<meta name="date" content="2026-02-11" />
+<meta name="date" content="2026-02-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -196,13 +196,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Considere el conjunto de datos us_state_population.tsv ubicado en la carpeta de datos de Python de github. Repita el procedimiento planteado en cada ítem de esta sección para obtener el nuevo dataframe con las nuevas columnas Year y Population. Realice unión y separación utilizando las columnas State y Code.</p>
 <div id="población-us" class="section level2 unnumbered hasAnchor">
 <h2>Población US<a href="ejercicio-3.html#población-us" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="ejercicio-3.html#cb13-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb13-2"><a href="ejercicio-3.html#cb13-2" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb13-3"><a href="ejercicio-3.html#cb13-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb13-4"><a href="ejercicio-3.html#cb13-4" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&#39;/Users/pctm/Desktop/Universidad/Sem 6/us_state_population.tsv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="ejercicio-3.html#cb14-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb14-2"><a href="ejercicio-3.html#cb14-2" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb14-3"><a href="ejercicio-3.html#cb14-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb14-4"><a href="ejercicio-3.html#cb14-4" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&#39;/Users/pctm/Desktop/Universidad/Sem 6/us_state_population.tsv&#39;</span>)</span></code></pre></div>
 <div id="recopilación" class="section level3 unnumbered hasAnchor">
 <h3>Recopilación<a href="ejercicio-3.html#recopilación" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="ejercicio-3.html#cb14-1" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="ejercicio-3.html#cb15-1" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 11
 ##   State     Code  `2010` `2011` `2012` `2013` `2014` `2015` `2016` `2017` `2018`
 ##   &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -212,14 +212,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 Arkansas  AR    2.92e6 2.94e6 2.95e6 2.96e6 2.97e6 2.98e6 2.99e6 3.00e6 3.01e6
 ## 5 Californ… CA    3.73e7 3.76e7 3.80e7 3.83e7 3.86e7 3.90e7 3.92e7 3.94e7 3.96e7
 ## 6 Colorado  CO    5.05e6 5.12e6 5.19e6 5.27e6 5.35e6 5.45e6 5.54e6 5.62e6 5.70e6</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="ejercicio-3.html#cb16-1" tabindex="-1"></a><span class="fu">names</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="ejercicio-3.html#cb17-1" tabindex="-1"></a><span class="fu">names</span>(df)</span></code></pre></div>
 <pre><code>##  [1] &quot;State&quot; &quot;Code&quot;  &quot;2010&quot;  &quot;2011&quot;  &quot;2012&quot;  &quot;2013&quot;  &quot;2014&quot;  &quot;2015&quot;  &quot;2016&quot; 
 ## [10] &quot;2017&quot;  &quot;2018&quot;</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="ejercicio-3.html#cb18-1" tabindex="-1"></a><span class="fu">gather</span>(df, <span class="st">&#39;2010&#39;</span><span class="sc">:</span><span class="st">&#39;2018&#39;</span>,</span>
-<span id="cb18-2"><a href="ejercicio-3.html#cb18-2" tabindex="-1"></a>                 <span class="at">key=</span><span class="st">&quot;YEAR&quot;</span>,</span>
-<span id="cb18-3"><a href="ejercicio-3.html#cb18-3" tabindex="-1"></a>                 <span class="at">value=</span><span class="st">&quot;POPULATION&quot;</span>) <span class="ot">-&gt;</span> df_reco</span>
-<span id="cb18-4"><a href="ejercicio-3.html#cb18-4" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="ejercicio-3.html#cb18-5" tabindex="-1"></a>df_reco</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="ejercicio-3.html#cb19-1" tabindex="-1"></a><span class="fu">gather</span>(df, <span class="st">&#39;2010&#39;</span><span class="sc">:</span><span class="st">&#39;2018&#39;</span>,</span>
+<span id="cb19-2"><a href="ejercicio-3.html#cb19-2" tabindex="-1"></a>                 <span class="at">key=</span><span class="st">&quot;YEAR&quot;</span>,</span>
+<span id="cb19-3"><a href="ejercicio-3.html#cb19-3" tabindex="-1"></a>                 <span class="at">value=</span><span class="st">&quot;POPULATION&quot;</span>) <span class="ot">-&gt;</span> df_reco</span>
+<span id="cb19-4"><a href="ejercicio-3.html#cb19-4" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="ejercicio-3.html#cb19-5" tabindex="-1"></a>df_reco</span></code></pre></div>
 <pre><code>## # A tibble: 459 × 4
 ##    State                Code  YEAR  POPULATION
 ##    &lt;chr&gt;                &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;
@@ -237,8 +237,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="unión" class="section level3 unnumbered hasAnchor">
 <h3>Unión<a href="ejercicio-3.html#unión" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="ejercicio-3.html#cb20-1" tabindex="-1"></a><span class="fu">unite</span>(df_reco, State_Code, State, Code) <span class="ot">-&gt;</span> unite_tb</span>
-<span id="cb20-2"><a href="ejercicio-3.html#cb20-2" tabindex="-1"></a>unite_tb</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="ejercicio-3.html#cb21-1" tabindex="-1"></a><span class="fu">unite</span>(df_reco, State_Code, State, Code) <span class="ot">-&gt;</span> unite_tb</span>
+<span id="cb21-2"><a href="ejercicio-3.html#cb21-2" tabindex="-1"></a>unite_tb</span></code></pre></div>
 <pre><code>## # A tibble: 459 × 3
 ##    State_Code              YEAR  POPULATION
 ##    &lt;chr&gt;                   &lt;chr&gt;      &lt;dbl&gt;
@@ -256,11 +256,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="separación" class="section level3 unnumbered hasAnchor">
 <h3>Separación<a href="ejercicio-3.html#separación" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="ejercicio-3.html#cb22-1" tabindex="-1"></a><span class="fu">separate</span>(unite_tb, <span class="st">&quot;State_Code&quot;</span>, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;State&quot;</span>, <span class="st">&quot;Code&quot;</span>)) <span class="ot">-&gt;</span> separate_tb</span></code></pre></div>
-<pre><code>## Warning: Expected 2 pieces. Additional pieces discarded in 99 rows [9, 30, 31,
-## 32, 33, 34, 35, 40, 41, 42, 49, 60, 81, 82, 83, 84, 85, 86, 91, 92,
-## ...].</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="ejercicio-3.html#cb24-1" tabindex="-1"></a>separate_tb</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="ejercicio-3.html#cb23-1" tabindex="-1"></a><span class="fu">separate</span>(unite_tb, <span class="st">&quot;State_Code&quot;</span>, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;State&quot;</span>, <span class="st">&quot;Code&quot;</span>)) <span class="ot">-&gt;</span> separate_tb</span></code></pre></div>
+<pre><code>## Warning: Expected 2 pieces. Additional pieces discarded in 99 rows [9, 30, 31, 32, 33,
+## 34, 35, 40, 41, 42, 49, 60, 81, 82, 83, 84, 85, 86, 91, 92, ...].</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="ejercicio-3.html#cb25-1" tabindex="-1"></a>separate_tb</span></code></pre></div>
 <pre><code>## # A tibble: 459 × 4
 ##    State       Code  YEAR  POPULATION
 ##    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;

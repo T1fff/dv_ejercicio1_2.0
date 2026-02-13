@@ -23,7 +23,7 @@
 <meta name="author" content="Tiffany Mendoza S." />
 
 
-<meta name="date" content="2026-02-11" />
+<meta name="date" content="2026-02-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -194,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Ejercicios Corte 1</h1>
 <p class="author"><em>Tiffany Mendoza S.</em></p>
-<p class="date"><em>2026-02-11</em></p>
+<p class="date"><em>2026-02-12</em></p>
 </div>
 <div id="ejercicio-1" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Ejercicio 1<a href="index.html#ejercicio-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -237,7 +237,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>Agrupar la informacion por cause y year.<a href="index.html#agrupar-la-informacion-por-cause-y-year." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="index.html#cb4-1" tabindex="-1"></a>df_filtrado <span class="sc">%&gt;%</span> </span>
 <span id="cb4-2"><a href="index.html#cb4-2" tabindex="-1"></a>  <span class="fu">group_by</span>(NATURE, STARTYR) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-3"><a href="index.html#cb4-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">median_acres =</span> <span class="fu">mean</span>(ACRES),</span>
+<span id="cb4-3"><a href="index.html#cb4-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_acres =</span> <span class="fu">mean</span>(ACRES),</span>
 <span id="cb4-4"><a href="index.html#cb4-4" tabindex="-1"></a>            <span class="at">ds_acres =</span> <span class="fu">sd</span>(ACRES),</span>
 <span id="cb4-5"><a href="index.html#cb4-5" tabindex="-1"></a>            <span class="at">mediana_acres =</span> <span class="fu">median</span>(ACRES),</span>
 <span id="cb4-6"><a href="index.html#cb4-6" tabindex="-1"></a>            <span class="at">RIC_acres =</span> <span class="fu">IQR</span>(ACRES),</span>
@@ -266,7 +266,7 @@ NATURE
 STARTYR
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-median_acres
+avg_acres
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 ds_acres
@@ -3670,6 +3670,20 @@ NA
 <p>El gráfico de barras muestra que la variación anual en acres quemados es muy alta y está dominada por unos pocos años con incendios extremadamente grandes; en esos picos la mayor parte del área quemada corresponde a causas naturales, mientras que las causas humanas contribuyen de forma constante pero en magnitud mucho menor.</p>
 <p><img src="ejercicios1_corte1_files/figure-html/unnamed-chunk-6-1.png" alt="" width="672" /></p>
 <p>Este gráfico muestra, año a año, la distribución del tamaño de incendios (acres por incendio) mediante boxplots: la caja (IQR) marca la dispersión central, la línea roja indica la mediana, los bigotes extienden la variación típica y los puntos/extremos fuera de los bigotes son outliers / mega-fires. Visualmente se aprecia que en la mayoría de los años la mediana es baja (los puntos rojos están cerca de la base), mientras que los bigotes y los outliers alcanzan valores enormes en unos pocos años. Esto indica una distribución con cola larga a la derecha: muchos incendios pequeños y unos pocos incendios extremadamente grandes que empujan la escala.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="index.html#cb6-1" tabindex="-1"></a><span class="fu">ggplot</span>(showdf,</span>
+<span id="cb6-2"><a href="index.html#cb6-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> STARTYR,</span>
+<span id="cb6-3"><a href="index.html#cb6-3" tabindex="-1"></a>           <span class="at">y =</span> avg_acres,</span>
+<span id="cb6-4"><a href="index.html#cb6-4" tabindex="-1"></a>           <span class="at">color =</span> NATURE)) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="index.html#cb6-5" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb6-6"><a href="index.html#cb6-6" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1980</span>, <span class="dv">2020</span>, <span class="at">by =</span> <span class="dv">5</span>))<span class="sc">+</span></span>
+<span id="cb6-7"><a href="index.html#cb6-7" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-8"><a href="index.html#cb6-8" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Acres quemados por causa en Idaho&quot;</span>,</span>
+<span id="cb6-9"><a href="index.html#cb6-9" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Año&quot;</span>,</span>
+<span id="cb6-10"><a href="index.html#cb6-10" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Acres quemados&quot;</span></span>
+<span id="cb6-11"><a href="index.html#cb6-11" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="index.html#cb6-12" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="ejercicios1_corte1_files/figure-html/unnamed-chunk-7-1.png" alt="" width="672" /></p>
+<p>El gráfico de líneas múltiples presentado anteriormente muestra la tendencia temporal de la media de acres quemados a lo largo de los años en el estado de Idaho, diferenciada según la causa del incendio. A partir del gráfico, se puede inferir que los incendios de origen natural son los que generan, en general, mayores pérdidas de superficie quemada a lo largo del tiempo. Esto se evidencia en que la línea verde, correspondiente a los incendios naturales, presenta los valores más altos y los picos más pronunciados en comparación con las demás causas. No obstante, se observan excepciones en algunos periodos específicos, como entre 1986 y 1989 y en el año 2016, donde los humanos fueron los que causaron valores elevados de acres quemados. Por otro lado, alrededor del año 2010 se presentó una mayor perdida de ejemplares por causa indeterminada y la linea de tendencia gris no se puede describir porque contempla datos NA.</p>
 
 </div>
 </div>

@@ -23,7 +23,7 @@
 <meta name="author" content="Tiffany Mendoza S." />
 
 
-<meta name="date" content="2026-02-11" />
+<meta name="date" content="2026-02-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -203,21 +203,21 @@ Su tarea consiste en identificar los cinco deportes más importantes según el m
 </ul>
 <div id="eventos-deportivos" class="section level2 unnumbered hasAnchor">
 <h2>Eventos deportivos<a href="ejercicio-2.html#eventos-deportivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="ejercicio-2.html#cb6-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb6-2"><a href="ejercicio-2.html#cb6-2" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb6-3"><a href="ejercicio-2.html#cb6-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb6-4"><a href="ejercicio-2.html#cb6-4" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;/Users/pctm/Desktop/Universidad/Sem 6/athlete_events.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="ejercicio-2.html#cb7-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb7-2"><a href="ejercicio-2.html#cb7-2" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb7-3"><a href="ejercicio-2.html#cb7-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-4"><a href="ejercicio-2.html#cb7-4" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;/Users/pctm/Desktop/Universidad/Sem 6/athlete_events.csv&#39;</span>)</span></code></pre></div>
 <div id="número-de-medallas-concedidas-en-cada-uno-de-los-cinco-principales-deportes-en-2016" class="section level3 unnumbered hasAnchor">
 <h3>Número de medallas concedidas en cada uno de los cinco principales deportes en 2016<a href="ejercicio-2.html#número-de-medallas-concedidas-en-cada-uno-de-los-cinco-principales-deportes-en-2016" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="ejercicio-2.html#cb7-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="ejercicio-2.html#cb7-2" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">==</span> <span class="dv">2016</span>, <span class="sc">!</span><span class="fu">is.na</span>(Medal)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="ejercicio-2.html#cb7-3" tabindex="-1"></a>  <span class="fu">count</span>(Sport, <span class="at">name =</span> <span class="st">&quot;medal_count&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="ejercicio-2.html#cb7-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(medal_count)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-5"><a href="ejercicio-2.html#cb7-5" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="ot">-&gt;</span> top5</span>
-<span id="cb7-6"><a href="ejercicio-2.html#cb7-6" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="ejercicio-2.html#cb7-7" tabindex="-1"></a><span class="fu">kable</span>(top5, <span class="at">caption =</span> <span class="st">&quot;Numero de medallas por deporte en 2016&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="ejercicio-2.html#cb8-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="ejercicio-2.html#cb8-2" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">==</span> <span class="dv">2016</span>, <span class="sc">!</span><span class="fu">is.na</span>(Medal)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="ejercicio-2.html#cb8-3" tabindex="-1"></a>  <span class="fu">count</span>(Sport, <span class="at">name =</span> <span class="st">&quot;medal_count&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="ejercicio-2.html#cb8-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(medal_count)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="ejercicio-2.html#cb8-5" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="ot">-&gt;</span> top5</span>
+<span id="cb8-6"><a href="ejercicio-2.html#cb8-6" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="ejercicio-2.html#cb8-7" tabindex="-1"></a><span class="fu">kable</span>(top5, <span class="at">caption =</span> <span class="st">&quot;Numero de medallas por deporte en 2016&quot;</span>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-9">Table 2.1: </span>Numero de medallas por deporte en 2016</caption>
+<caption><span id="tab:unnamed-chunk-10">Table 2.1: </span>Numero de medallas por deporte en 2016</caption>
 <thead>
 <tr class="header">
 <th align="left">Sport</th>
@@ -247,30 +247,30 @@ Su tarea consiste en identificar los cinco deportes más importantes según el m
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="ejercicio-2.html#cb8-1" tabindex="-1"></a>top5_sports <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Athletics&quot;</span>, <span class="st">&quot;Swimming&quot;</span>, <span class="st">&quot;Rowing&quot;</span>, <span class="st">&quot;Football&quot;</span>, <span class="st">&quot;Hockey&quot;</span>)</span>
-<span id="cb8-2"><a href="ejercicio-2.html#cb8-2" tabindex="-1"></a>df_filtrado <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="ejercicio-2.html#cb8-3" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">==</span> <span class="dv">2016</span>, Sport <span class="sc">%in%</span> top5_sports, <span class="sc">!</span><span class="fu">is.na</span>(Medal)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-4"><a href="ejercicio-2.html#cb8-4" tabindex="-1"></a>  <span class="fu">select</span>(Sport, Name, Age, Sex, Team, Medal, Weight)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="ejercicio-2.html#cb9-1" tabindex="-1"></a>top5_sports <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Athletics&quot;</span>, <span class="st">&quot;Swimming&quot;</span>, <span class="st">&quot;Rowing&quot;</span>, <span class="st">&quot;Football&quot;</span>, <span class="st">&quot;Hockey&quot;</span>)</span>
+<span id="cb9-2"><a href="ejercicio-2.html#cb9-2" tabindex="-1"></a>df_filtrado <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="ejercicio-2.html#cb9-3" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">==</span> <span class="dv">2016</span>, Sport <span class="sc">%in%</span> top5_sports, <span class="sc">!</span><span class="fu">is.na</span>(Medal)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="ejercicio-2.html#cb9-4" tabindex="-1"></a>  <span class="fu">select</span>(Sport, Name, Age, Sex, Team, Medal, Weight)</span></code></pre></div>
 </div>
 <div id="distribución-de-la-edad-de-los-ganadores-de-medallas-en-los-cinco-principales-deportes-en-2016." class="section level3 unnumbered hasAnchor">
 <h3>Distribución de la edad de los ganadores de medallas en los cinco principales deportes en 2016.<a href="ejercicio-2.html#distribución-de-la-edad-de-los-ganadores-de-medallas-en-los-cinco-principales-deportes-en-2016." class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="ejercicio-2.html#cb9-1" tabindex="-1"></a>df_filtrado <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="ejercicio-2.html#cb9-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Sport) <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="ejercicio-2.html#cb9-3" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
-<span id="cb9-4"><a href="ejercicio-2.html#cb9-4" tabindex="-1"></a>      <span class="at">n =</span> <span class="fu">n</span>(),</span>
-<span id="cb9-5"><a href="ejercicio-2.html#cb9-5" tabindex="-1"></a>      <span class="at">mean_age =</span> <span class="fu">mean</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb9-6"><a href="ejercicio-2.html#cb9-6" tabindex="-1"></a>      <span class="at">median_age =</span> <span class="fu">median</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb9-7"><a href="ejercicio-2.html#cb9-7" tabindex="-1"></a>      <span class="at">sd_age =</span> <span class="fu">sd</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb9-8"><a href="ejercicio-2.html#cb9-8" tabindex="-1"></a>      <span class="at">IQR_age =</span> <span class="fu">IQR</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb9-9"><a href="ejercicio-2.html#cb9-9" tabindex="-1"></a>      <span class="at">min_age =</span> <span class="fu">min</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb9-10"><a href="ejercicio-2.html#cb9-10" tabindex="-1"></a>      <span class="at">max_age =</span> <span class="fu">max</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb9-11"><a href="ejercicio-2.html#cb9-11" tabindex="-1"></a>      <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
-<span id="cb9-12"><a href="ejercicio-2.html#cb9-12" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb9-13"><a href="ejercicio-2.html#cb9-13" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="ot">-&gt;</span> dist_edad</span>
-<span id="cb9-14"><a href="ejercicio-2.html#cb9-14" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="ejercicio-2.html#cb9-15" tabindex="-1"></a><span class="fu">kable</span>(dist_edad, <span class="at">caption =</span> <span class="st">&quot;Tabla de distribución de edad&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="ejercicio-2.html#cb10-1" tabindex="-1"></a>df_filtrado <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="ejercicio-2.html#cb10-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Sport) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="ejercicio-2.html#cb10-3" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb10-4"><a href="ejercicio-2.html#cb10-4" tabindex="-1"></a>      <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb10-5"><a href="ejercicio-2.html#cb10-5" tabindex="-1"></a>      <span class="at">mean_age =</span> <span class="fu">mean</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-6"><a href="ejercicio-2.html#cb10-6" tabindex="-1"></a>      <span class="at">median_age =</span> <span class="fu">median</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-7"><a href="ejercicio-2.html#cb10-7" tabindex="-1"></a>      <span class="at">sd_age =</span> <span class="fu">sd</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-8"><a href="ejercicio-2.html#cb10-8" tabindex="-1"></a>      <span class="at">IQR_age =</span> <span class="fu">IQR</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-9"><a href="ejercicio-2.html#cb10-9" tabindex="-1"></a>      <span class="at">min_age =</span> <span class="fu">min</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-10"><a href="ejercicio-2.html#cb10-10" tabindex="-1"></a>      <span class="at">max_age =</span> <span class="fu">max</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-11"><a href="ejercicio-2.html#cb10-11" tabindex="-1"></a>      <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb10-12"><a href="ejercicio-2.html#cb10-12" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb10-13"><a href="ejercicio-2.html#cb10-13" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="ot">-&gt;</span> dist_edad</span>
+<span id="cb10-14"><a href="ejercicio-2.html#cb10-14" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="ejercicio-2.html#cb10-15" tabindex="-1"></a><span class="fu">kable</span>(dist_edad, <span class="at">caption =</span> <span class="st">&quot;Tabla de distribución de edad&quot;</span>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-11">Table 2.2: </span>Tabla de distribución de edad</caption>
+<caption><span id="tab:unnamed-chunk-12">Table 2.2: </span>Tabla de distribución de edad</caption>
 <colgroup>
 <col width="14%" />
 <col width="5%" />
@@ -349,15 +349,15 @@ Su tarea consiste en identificar los cinco deportes más importantes según el m
 </div>
 <div id="equipos-nacionales-ganaron-el-mayor-número-de-medallas-en-los-cinco-principales-deportes-en-2016." class="section level3 unnumbered hasAnchor">
 <h3>Equipos nacionales ganaron el mayor número de medallas en los cinco principales deportes en 2016.<a href="ejercicio-2.html#equipos-nacionales-ganaron-el-mayor-número-de-medallas-en-los-cinco-principales-deportes-en-2016." class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="ejercicio-2.html#cb10-1" tabindex="-1"></a>df_filtrado <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="ejercicio-2.html#cb10-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Team) <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="ejercicio-2.html#cb10-3" tabindex="-1"></a>  <span class="fu">count</span>(Team, <span class="at">name =</span> <span class="st">&quot;medal_count&quot;</span>)  <span class="sc">%&gt;%</span> </span>
-<span id="cb10-4"><a href="ejercicio-2.html#cb10-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(medal_count)) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-5"><a href="ejercicio-2.html#cb10-5" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="ot">-&gt;</span> top5_teams</span>
-<span id="cb10-6"><a href="ejercicio-2.html#cb10-6" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="ejercicio-2.html#cb10-7" tabindex="-1"></a><span class="fu">kable</span>(top5_teams, <span class="at">caption =</span> <span class="st">&quot;Top 5 equipos&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="ejercicio-2.html#cb11-1" tabindex="-1"></a>df_filtrado <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="ejercicio-2.html#cb11-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Team) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="ejercicio-2.html#cb11-3" tabindex="-1"></a>  <span class="fu">count</span>(Team, <span class="at">name =</span> <span class="st">&quot;medal_count&quot;</span>)  <span class="sc">%&gt;%</span> </span>
+<span id="cb11-4"><a href="ejercicio-2.html#cb11-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(medal_count)) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-5"><a href="ejercicio-2.html#cb11-5" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="ot">-&gt;</span> top5_teams</span>
+<span id="cb11-6"><a href="ejercicio-2.html#cb11-6" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="ejercicio-2.html#cb11-7" tabindex="-1"></a><span class="fu">kable</span>(top5_teams, <span class="at">caption =</span> <span class="st">&quot;Top 5 equipos&quot;</span>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-12">Table 2.3: </span>Top 5 equipos</caption>
+<caption><span id="tab:unnamed-chunk-13">Table 2.3: </span>Top 5 equipos</caption>
 <thead>
 <tr class="header">
 <th align="left">Team</th>
@@ -390,17 +390,17 @@ Su tarea consiste en identificar los cinco deportes más importantes según el m
 </div>
 <div id="tendencia-del-peso-de-los-atletas-masculinos-y-femeninos-en-los-cinco-principales-deportes-en-2016." class="section level3 unnumbered hasAnchor">
 <h3>Tendencia del peso de los atletas masculinos y femeninos en los cinco principales deportes en 2016.<a href="ejercicio-2.html#tendencia-del-peso-de-los-atletas-masculinos-y-femeninos-en-los-cinco-principales-deportes-en-2016." class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="ejercicio-2.html#cb11-1" tabindex="-1"></a>df_filtrado <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="ejercicio-2.html#cb11-2" tabindex="-1"></a> <span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-3"><a href="ejercicio-2.html#cb11-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb11-4"><a href="ejercicio-2.html#cb11-4" tabindex="-1"></a>    <span class="at">mean_w =</span> <span class="fu">mean</span>(Weight,<span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-5"><a href="ejercicio-2.html#cb11-5" tabindex="-1"></a>    <span class="at">median_w =</span> <span class="fu">median</span>(Weight,<span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-6"><a href="ejercicio-2.html#cb11-6" tabindex="-1"></a>    <span class="at">min_w =</span> <span class="fu">min</span>(Weight,<span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-7"><a href="ejercicio-2.html#cb11-7" tabindex="-1"></a>    <span class="at">max_w =</span> <span class="fu">max</span>(Weight,<span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-8"><a href="ejercicio-2.html#cb11-8" tabindex="-1"></a>    <span class="at">sd_w =</span> <span class="fu">sd</span>(Weight,<span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-9"><a href="ejercicio-2.html#cb11-9" tabindex="-1"></a>    <span class="at">IQR_w =</span> <span class="fu">IQR</span>(Weight,<span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="ot">-&gt;</span> tendencia_w</span>
-<span id="cb11-10"><a href="ejercicio-2.html#cb11-10" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="ejercicio-2.html#cb11-11" tabindex="-1"></a><span class="fu">kable</span>(tendencia_w)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="ejercicio-2.html#cb12-1" tabindex="-1"></a>df_filtrado <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="ejercicio-2.html#cb12-2" tabindex="-1"></a> <span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="ejercicio-2.html#cb12-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb12-4"><a href="ejercicio-2.html#cb12-4" tabindex="-1"></a>    <span class="at">mean_w =</span> <span class="fu">mean</span>(Weight,<span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-5"><a href="ejercicio-2.html#cb12-5" tabindex="-1"></a>    <span class="at">median_w =</span> <span class="fu">median</span>(Weight,<span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-6"><a href="ejercicio-2.html#cb12-6" tabindex="-1"></a>    <span class="at">min_w =</span> <span class="fu">min</span>(Weight,<span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-7"><a href="ejercicio-2.html#cb12-7" tabindex="-1"></a>    <span class="at">max_w =</span> <span class="fu">max</span>(Weight,<span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-8"><a href="ejercicio-2.html#cb12-8" tabindex="-1"></a>    <span class="at">sd_w =</span> <span class="fu">sd</span>(Weight,<span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-9"><a href="ejercicio-2.html#cb12-9" tabindex="-1"></a>    <span class="at">IQR_w =</span> <span class="fu">IQR</span>(Weight,<span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="ot">-&gt;</span> tendencia_w</span>
+<span id="cb12-10"><a href="ejercicio-2.html#cb12-10" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="ejercicio-2.html#cb12-11" tabindex="-1"></a><span class="fu">kable</span>(tendencia_w)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -434,16 +434,16 @@ Su tarea consiste en identificar los cinco deportes más importantes según el m
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="ejercicio-2.html#cb12-1" tabindex="-1"></a><span class="fu">ggplot</span>(df_filtrado, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Sex), <span class="at">y =</span> Weight, <span class="at">fill =</span> Sex)) <span class="sc">+</span></span>
-<span id="cb12-2"><a href="ejercicio-2.html#cb12-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="dv">21</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb12-3"><a href="ejercicio-2.html#cb12-3" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.12</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb12-4"><a href="ejercicio-2.html#cb12-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">23</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
-<span id="cb12-5"><a href="ejercicio-2.html#cb12-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribución del peso por sexo&quot;</span>,</span>
-<span id="cb12-6"><a href="ejercicio-2.html#cb12-6" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Sexo&quot;</span>,</span>
-<span id="cb12-7"><a href="ejercicio-2.html#cb12-7" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Peso (kg)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb12-8"><a href="ejercicio-2.html#cb12-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb12-9"><a href="ejercicio-2.html#cb12-9" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
-<p><img src="ejercicios1_corte1_files/figure-html/unnamed-chunk-13-1.png" alt="" width="672" />
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="ejercicio-2.html#cb13-1" tabindex="-1"></a><span class="fu">ggplot</span>(df_filtrado, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Sex), <span class="at">y =</span> Weight, <span class="at">fill =</span> Sex)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="ejercicio-2.html#cb13-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="dv">21</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="ejercicio-2.html#cb13-3" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.12</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="ejercicio-2.html#cb13-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">23</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="ejercicio-2.html#cb13-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribución del peso por sexo&quot;</span>,</span>
+<span id="cb13-6"><a href="ejercicio-2.html#cb13-6" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Sexo&quot;</span>,</span>
+<span id="cb13-7"><a href="ejercicio-2.html#cb13-7" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Peso (kg)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="ejercicio-2.html#cb13-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb13-9"><a href="ejercicio-2.html#cb13-9" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="ejercicios1_corte1_files/figure-html/unnamed-chunk-14-1.png" alt="" width="672" />
 Para F (mujeres): la mediana está alrededor de 65 kg y la caja (IQR) es relativamente estrecha, lo que indica que la mayoría de las atletas ganadoras se agrupan cerca de ese valor; los bigotes son moderados y aparecen pocos outliers, aunque hay una cola derecha leve con algunos pesos atípicos. Para M (hombres): la mediana se ubica aproximadamente entre 75–80 kg, la caja es más ancha (mayor IQR) señalando mayor dispersión interna, y los bigotes junto con numerosos puntos atípicos muestran una cola derecha más pronunciada —es decir, hay más observaciones con pesos extremos. En ambos grupos se observan valores atípicos que podrían deberse a posiciones/disciplinas específica</p>
 
 </div>

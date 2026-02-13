@@ -1,6 +1,0 @@
-book_filename: "ejercicios1_corte1"
-output_dir: "docs"
-delete_merged_file: true
-language:
-  ui:
-    chapter_name: "Chapter "

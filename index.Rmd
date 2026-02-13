@@ -66,7 +66,7 @@ head(df_filtrado)
 
 df_filtrado %>% 
   group_by(NATURE, STARTYR) %>% 
-  summarise(median_acres = mean(ACRES),
+  summarise(avg_acres = mean(ACRES),
             ds_acres = sd(ACRES),
             mediana_acres = median(ACRES),
             RIC_acres = IQR(ACRES),
@@ -110,3 +110,21 @@ ggplot(showdf, aes(x = factor(STARTYR), y = total_acres)) +
 ```
 
 Este gráfico muestra, año a año, la distribución del tamaño de incendios (acres por incendio) mediante boxplots: la caja (IQR) marca la dispersión central, la línea roja indica la mediana, los bigotes extienden la variación típica y los puntos/extremos fuera de los bigotes son outliers / mega-fires. Visualmente se aprecia que en la mayoría de los años la mediana es baja (los puntos rojos están cerca de la base), mientras que los bigotes y los outliers alcanzan valores enormes en unos pocos años. Esto indica una distribución con cola larga a la derecha: muchos incendios pequeños y unos pocos incendios extremadamente grandes que empujan la escala.
+
+   
+```{r}
+ggplot(showdf,
+       aes(x = STARTYR,
+           y = avg_acres,
+           color = NATURE)) +
+  geom_line() +
+  scale_x_continuous(breaks = seq(1980, 2020, by = 5))+
+  labs(
+    title = "Acres quemados por causa en Idaho",
+    x = "Año",
+    y = "Acres quemados"
+  ) +
+  theme_minimal()
+```
+
+El gráfico de líneas múltiples presentado anteriormente muestra la tendencia temporal de la media de acres quemados a lo largo de los años en el estado de Idaho, diferenciada según la causa del incendio. A partir del gráfico, se puede inferir que los incendios de origen natural son los que generan, en general, mayores pérdidas de superficie quemada a lo largo del tiempo. Esto se evidencia en que la línea verde, correspondiente a los incendios naturales, presenta los valores más altos y los picos más pronunciados en comparación con las demás causas. No obstante, se observan excepciones en algunos periodos específicos, como entre 1986 y 1989 y en el año 2016, donde los humanos fueron los que causaron valores elevados de acres quemados. Por otro lado, alrededor del año 2010 se presentó una mayor perdida de ejemplares por causa indeterminada y la linea de tendencia gris no se puede describir porque contempla datos NA.  
